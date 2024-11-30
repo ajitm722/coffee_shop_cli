@@ -1,10 +1,10 @@
-# Coffee Shop CLI
+# Coffee Shop CLI ☕
 
 ---
 
 ## Table of Contents
 
-- [Coffee Shop CLI](#coffee-shop-cli)
+- [Coffee Shop CLI ☕](#coffee-shop-cli-)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
   - [Setup Instructions](#setup-instructions)
@@ -21,6 +21,7 @@
   - [Makefile Commands](#makefile-commands)
   - [Help Section](#help-section)
   - [Dependencies](#dependencies)
+    - [System Requirements](#system-requirements)
 
 ## Overview
 
@@ -182,8 +183,16 @@ This will display all the available commands and their descriptions.
 
 ## Dependencies
 
-- Go 1.18 or higher
-- Gin for custom routing
-- Cobra CLI framework
-- Viper for configuration management
-- HTTP server for handling API requests (running at `http://localhost:8080`)
+This project requires the following to run:
+
+- **Go**: The Go programming language (version 1.16 or higher).
+- **Make**: A tool to automate the build process.
+
+### System Requirements
+
+This project is designed to run on Unix-based machines, including:
+
+- **macOS** (version 10.15 or higher)
+- **Linux** (Ubuntu, Fedora, or any other Linux distribution)
+
+For **Windows** users, it is recommended to use **Windows Subsystem for Linux (WSL)** or run the commands in a **Linux-based environment** like Docker or a virtual machine.
