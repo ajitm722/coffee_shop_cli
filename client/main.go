@@ -14,7 +14,7 @@ import (
 func main() {
 	// Root command
 	var rootCmd = &cobra.Command{
-		Use:   "coffeecli",
+		Use:   "./coffee-cli",
 		Short: "CLI for managing coffee orders",
 	}
 
