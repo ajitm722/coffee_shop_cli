@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -41,15 +42,31 @@ func main() {
 
 	// Subcommand: Place a new order
 	var placeCmd = &cobra.Command{
-		Use:   "place [client] [coffee] [size] [quantity]",
+		Use:   "place [client] [drink] [size] [quantity] [comment]",
 		Short: "Place a new coffee order",
-		Args:  cobra.ExactArgs(4),
+		Args:  cobra.MinimumNArgs(4), // At least 4 arguments (comment is optional)
 		Run: func(cmd *cobra.Command, args []string) {
 			client, drink, size, quantity := args[0], args[1], args[2], args[3]
-			orderJSON := fmt.Sprintf(`{"client": "%s", "drink": "%s", "size": "%s", "quantity": %s}`,
-				client, drink, size, quantity)
+			comment := ""
+			if len(args) > 4 {
+				comment = args[4] // Optional comment
+			}
 
-			resp, err := http.Post(viper.GetString("api.url")+"/orders", "application/json", bytes.NewBuffer([]byte(orderJSON)))
+			order := map[string]interface{}{
+				"client":   client,
+				"drink":    drink,
+				"size":     size,
+				"quantity": quantity,
+				"comment":  comment,
+			}
+
+			orderJSON, err := json.Marshal(order)
+			if err != nil {
+				fmt.Println("Error: Unable to create order payload,", err)
+				return
+			}
+
+			resp, err := http.Post(viper.GetString("api.url")+"/orders", "application/json", bytes.NewBuffer(orderJSON))
 			if err != nil {
 				fmt.Println("Error: Unable to place order,", err)
 				return
